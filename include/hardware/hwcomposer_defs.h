@@ -41,6 +41,18 @@ __BEGIN_DECLS
 #define HWC_DEVICE_API_VERSION_1_3  HARDWARE_DEVICE_API_VERSION_2(1, 3, HWC_HEADER_VERSION)
 #define HWC_DEVICE_API_VERSION_1_4  HARDWARE_DEVICE_API_VERSION_2(1, 4, HWC_HEADER_VERSION)
 
+#ifdef STE_HARDWARE
+/* STE specific modifications to the hwcomposer API require
+ * a separate DEVICE_API_VERSION since the resulting structures
+ * aren't binary compatible with the vanilla android version.
+ * We don't actually change the version number itself since
+ * that could potentially conflict with future versions of hwcomposer.
+ * Rather we just add the possibility to check for the presence
+ * of STE modifications.
+ */
+#define HWC_DEVICE_API_VERSION_0_3_STE HWC_DEVICE_API_VERSION_0_3
+#endif
+
 enum {
     /* hwc_composer_device_t::set failed in EGL */
     HWC_EGL_ERROR = -1
